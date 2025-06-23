@@ -1,16 +1,24 @@
 <template>
-  <div class="flex flex-col min-h-screen">
-    <Navbar />
+  <div class="flex min-h-screen">
+    <Sidebar />
 
-    <main class="flex-grow">
-      <RouterView />
-    </main>
-
-    <Footer />
+    <div class="flex-grow ml-64">
+      <Navbar />
+      <main class="p-6 bg-gray-100 min-h-screen">
+        <RouterView />
+      </main>
+    </div>
   </div>
 </template>
 
 <script setup>
-import Navbar from './components/layout/Navbar.vue'
-import Footer from './components/layout/Footer.vue'
+import Sidebar from "./components/layout/Sidebar.vue";
+import Navbar from "./components/layout/Navbar.vue";
 </script>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+</style>
