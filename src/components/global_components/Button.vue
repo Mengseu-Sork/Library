@@ -11,9 +11,10 @@
 import { computed } from 'vue'
 
 const emit = defineEmits(['click'])
+
 const props = defineProps({
   label: { type: String, required: true },
-  color: { type: String, default: 'blue' }
+  color: { type: String, default: 'blue' }, // options: blue, red, green, yellow
 })
 
 const colors = {
@@ -36,7 +37,7 @@ const colors = {
     base: 'bg-yellow-400',
     hover: 'hover:bg-yellow-500',
     focusRing: 'focus:ring-yellow-300',
-  }
+  },
 }
 
 const buttonClasses = computed(() => {
