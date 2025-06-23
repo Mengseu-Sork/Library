@@ -10,6 +10,16 @@
             active-class="bg-gray-700 font-bold"
             exact-active-class="bg-blue-700 font-bold"
           >
+            Dashboard
+          </RouterLink>
+        </li>
+        <li>
+          <RouterLink
+            to="/members"
+            class="block p-2 rounded hover:bg-gray-700"
+            active-class="bg-gray-700 font-bold"
+            exact-active-class="bg-blue-700 font-bold"
+          >
             Members
           </RouterLink>
         </li>
