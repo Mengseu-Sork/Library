@@ -1,10 +1,10 @@
 <template>
-  <div class="flex min-h-screen">
+  <div class="flex max-h-screen">
     <Sidebar />
 
     <div class="flex-grow ml-64">
       <Navbar />
-      <main class="p-6 bg-gray-100 min-h-screen">
+      <main class="p-6 bg-gray-100 max-h-[87vh] overflow-y-auto">
         <RouterView />
       </main>
     </div>

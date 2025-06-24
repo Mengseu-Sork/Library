@@ -2,13 +2,23 @@
   <div class="p-6">
     <h1 class="text-2xl font-bold mb-4 text-blue-700">📚 Member Management</h1>
 
-    <!-- Member Form -->
-    <MemberForm
-      :formData="form"
-      :isEditing="isEditing"
-      @submitForm="saveMember"
-      @cancelEdit="cancelEdit"
-    />
+    <!-- Add Member Button -->
+    <button
+      @click="openAddForm"
+      class="mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+    >
+      ➕ Add Member
+    </button>
+
+    <!-- Show Member Form inside modal -->
+    <Modal v-if="showForm" @close="cancelEdit">
+      <MemberForm
+        :formData="form"
+        :isEditing="isEditing"
+        @submitForm="saveMember"
+        @cancelEdit="cancelEdit"
+      />
+    </Modal>
 
     <!-- Members Table -->
     <MemberTable
@@ -23,13 +33,19 @@
 import { ref, onMounted } from "vue";
 import MemberForm from "../components/member/Form.vue";
 import MemberTable from "../components/member/Table.vue";
-import { fetchMembers, createMember, updateMember, deleteMember } from "../servers/memberService";
+import {
+  fetchMembers,
+  createMember,
+  updateMember,
+  deleteMember
+} from "../servers/memberService";
 
 // Reactive State
 const members = ref([]);
 const form = ref({ name: "", age: "", email: "", password: "" });
 const isEditing = ref(false);
 const editId = ref(null);
+const showForm = ref(false); // Control modal visibility
 
 // Fetch Members
 const getMembers = async () => {
@@ -41,6 +57,12 @@ const getMembers = async () => {
   }
 };
 
+// Open Form for New Member
+const openAddForm = () => {
+  resetForm();
+  showForm.value = true;
+};
+
 // Add or Update Member
 const saveMember = async (data) => {
   try {
@@ -50,6 +72,7 @@ const saveMember = async (data) => {
       await createMember(data);
     }
     resetForm();
+    showForm.value = false; // Close modal after save
     getMembers();
   } catch (error) {
     console.error("Error saving member:", error);
@@ -58,9 +81,10 @@ const saveMember = async (data) => {
 
 // Edit Member
 const editMember = (member) => {
-  form.value = { name: member.name, age: member.age, email: member.email, password: member.password };
+  form.value = { ...member };
   editId.value = member.id;
   isEditing.value = true;
+  showForm.value = true; // Open modal in edit mode
 };
 
 // Delete Member
@@ -75,18 +99,19 @@ const removeMember = async (id) => {
   }
 };
 
-// Cancel Edit
+// Cancel Form (used on cancel or modal close)
 const cancelEdit = () => {
   resetForm();
+  showForm.value = false;
 };
 
-// Reset Form
+// Reset Form Data
 const resetForm = () => {
   form.value = { name: "", age: "", email: "", password: "" };
   isEditing.value = false;
   editId.value = null;
 };
 
-// Fetch members on component mount
+// Load members on component mount
 onMounted(getMembers);
 </script>
