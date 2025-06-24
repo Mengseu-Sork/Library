@@ -1,16 +1,65 @@
 <template>
-  <div class="max-w-full">
-    <h1 class="text-3xl font-bold mb-6 text-blue-700">Librarians</h1>
+  <div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-800 flex items-center">
+          <span class="text-4xl mr-3">👨‍💼</span>
+          Librarians Management
+        </h1>
+        <p class="text-slate-600 mt-2">Manage your library staff and their access permissions</p>
+      </div>
+    </div>
 
-    <Button
-      v-if="!showForm"
-      label="➕ Add Librarian"
-      color="blue"
-      @click="openCreateForm"
-      class="mb-4"
-    />
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-slate-600 rounded-xl flex items-center justify-center text-white text-xl">
+            👨‍💼
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Total Librarians</p>
+            <p class="text-2xl font-bold text-slate-800">{{ librarians.length }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl">
+            ✅
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Active Staff</p>
+            <p class="text-2xl font-bold text-slate-800">{{ librarians.length }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
+            🔐
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Admin Access</p>
+            <p class="text-2xl font-bold text-slate-800">3</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl">
+            📊
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Departments</p>
+            <p class="text-2xl font-bold text-slate-800">5</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Show form inside modal -->
+    <!-- Modal for Librarian Form -->
     <Modal v-if="showForm" @close="cancelEdit">
       <LibrarianForm
         :formData="form"
@@ -20,10 +69,12 @@
       />
     </Modal>
 
+    <!-- Librarians Table -->
     <LibrarianTable
       :librarians="librarians"
       @editLibrarian="editLibrarian"
       @deleteLibrarian="deleteLibrarian"
+      @create="openCreateForm"
     />
   </div>
 </template>
@@ -90,16 +141,11 @@ const deleteLibrarian = async (id) => {
     console.error('Failed to delete librarian:', error)
   }
 }
+
 const cancelEdit = () => {
-  showForm.value = false        // hide the form
-  isEditing.value = false       // reset editing state
-  form.value = {                // reset form data to empty
-    id: null,
-    name: '',
-    age: '',
-    email: '',
-    password: ''
-  }
+  showForm.value = false
+  isEditing.value = false
+  form.value = { id: null, name: '', age: '', email: '', password: '' }
 }
 
 onMounted(loadLibrarians)
