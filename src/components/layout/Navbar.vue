@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 text-white p-4 shadow-xl flex justify-between items-center border-b border-slate-600/50">
+  <nav class="sticky top-0 z-50 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 text-white p-4 shadow-xl flex justify-between items-center border-b border-slate-600/50">
     <!-- Left Side - Title -->
     <div class="flex items-center space-x-4">
       <div class="text-3xl font-bold text-white">

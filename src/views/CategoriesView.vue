@@ -1,3 +1,84 @@
+<template>
+  <div class="space-y-6">
+    <!-- Page Header -->
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-3xl font-bold text-slate-800 flex items-center">
+          <span class="text-4xl mr-3">🏷️</span>
+          Categories Management
+        </h1>
+        <p class="text-slate-600 mt-2">Organize and manage your library book categories</p>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-slate-600 rounded-xl flex items-center justify-center text-white text-xl">
+            🏷️
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Total Categories</p>
+            <p class="text-2xl font-bold text-slate-800">{{ categories.length }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-green-500 rounded-xl flex items-center justify-center text-white text-xl">
+            📚
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Books Categorized</p>
+            <p class="text-2xl font-bold text-slate-800">156</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center text-white text-xl">
+            📈
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Most Popular</p>
+            <p class="text-2xl font-bold text-slate-800">Fiction</p>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-6 border border-slate-200/50 shadow-lg hover:shadow-xl transition-shadow">
+        <div class="flex items-center">
+          <div class="w-12 h-12 bg-purple-500 rounded-xl flex items-center justify-center text-white text-xl">
+            ⭐
+          </div>
+          <div class="ml-4">
+            <p class="text-sm text-slate-600">Active</p>
+            <p class="text-2xl font-bold text-slate-800">{{ categories.length }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Category Form -->
+    <Modal v-if="showForm" @close="cancelEdit">
+      <CategoryForm
+        :form="form"
+        :isEditing="isEditing"
+        @save="saveCategory"
+        @cancel="cancelEdit"
+      />
+    </Modal>
+
+    <!-- Categories Table -->
+    <CategoryTable
+      :categories="categories"
+      @edit="editCategory"
+      @delete="deleteCategory"
+      @create="openCreateForm"
+    />
+  </div>
+</template>
+
 <script setup>
 import { ref, onMounted } from 'vue'
 import CategoryForm from '../components/categorys/CategoryForm.vue'
@@ -69,22 +150,3 @@ const cancelEdit = () => {
 
 onMounted(loadCategories)
 </script>
-
-<template>
-  <div class="p-2 space-y-6">
-    <Button @click="openCreateForm" class="px-4 py-2 rounded"
-    label="+ Add Category"
-    />
-
-    <CategoryTable :categories="categories" @edit="editCategory" @delete="deleteCategory" />
-
-    <Modal v-if="showForm">
-      <CategoryForm
-        :form="form"
-        :isEditing="isEditing"
-        @save="saveCategory"
-        @cancel="cancelEdit"
-      />
-    </Modal>
-  </div>
-</template>
