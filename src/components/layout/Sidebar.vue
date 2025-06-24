@@ -1,6 +1,10 @@
 <template>
-  <aside class="bg-gray-800 text-white w-64 h-full fixed top-0 left-0 flex flex-col">
-    <div class="p-4 text-lg font-bold">Menu</div>
+  <aside class="bg-[#575757] text-white w-64 h-full fixed top-0 left-0 flex flex-col">
+    <div class="p-4 flex flex-col justify-center mx-auto">
+      <img src="../../assets/images/logo.jpg" alt="" class="h-24 w-24" />
+      <span class="text-xl font-bold text-center">Library</span>
+    </div>
+
     <nav class="flex-grow">
       <ul class="space-y-2 p-4">
         <li>

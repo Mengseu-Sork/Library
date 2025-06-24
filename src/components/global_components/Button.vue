@@ -43,7 +43,7 @@ const colors = {
 const buttonClasses = computed(() => {
   const colorClasses = colors[props.color] || colors.blue
   return [
-    'px-6 py-3 text-white font-semibold rounded-lg shadow-md',
+    'px-4 py-2 text-white font-semibold rounded-lg shadow-md',
     colorClasses.base,
     colorClasses.hover,
     'focus:outline-none focus:ring-2 focus:ring-opacity-75',
