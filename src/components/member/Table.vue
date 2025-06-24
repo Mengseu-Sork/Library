@@ -18,25 +18,27 @@
         <td class="border p-2">{{ member.email }}</td>
         <td class="border p-2">{{ member.password }}</td>
         <td class="border p-2 text-center space-x-2">
-          <BaseButton
-            variant="primary"
-            aria-label="Edit member"
+          <!-- Edit Icon Button -->
+          <button
             @click="$emit('editMember', member)"
+            class="text-blue-500 hover:text-blue-700"
+            aria-label="Edit member"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536M9 11l6-6 3 3-6 6-3 3H6v-3l3-3z" />
             </svg>
-          </BaseButton>
+          </button>
 
-          <BaseButton
-            variant="danger"
-            aria-label="Delete member"
+          <!-- Delete Icon Button -->
+          <button
             @click="$emit('deleteMember', member.id)"
+            class="text-red-500 hover:text-red-700"
+            aria-label="Delete member"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
-          </BaseButton>
+          </button>
         </td>
       </tr>
     </tbody>
