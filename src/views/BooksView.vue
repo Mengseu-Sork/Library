@@ -38,7 +38,7 @@ import {
   createBooks,
   updateBooks,
   deleteBooks
-} from "../servers/booksServices";
+} from "../api/booksServices";
 
 // State
 const books = ref([]);
@@ -84,7 +84,14 @@ const saveBook = async (data) => {
 
 // Edit Book
 const editBook = (book) => {
-  form.value = { title: book.title, author: book.author, year: book.year };
+  form.value = {
+    title: book.title,
+    author: book.author,
+    year: book.year,
+    category_id: book.category?.id || book.category_id,
+    member_id: book.member?.id || book.member_id,
+    librarian_id: book.librarian?.id || book.librarian_id
+  };
   editId.value = book.id;
   isEditing.value = true;
   showForm.value = true;

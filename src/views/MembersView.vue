@@ -38,7 +38,7 @@ import {
   createMember,
   updateMember,
   deleteMember
-} from "../servers/memberService";
+} from "../api/memberService";
 
 // Reactive State
 const members = ref([]);

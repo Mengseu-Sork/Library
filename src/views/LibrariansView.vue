@@ -37,7 +37,7 @@ import {
   createLibrarian,
   updateLibrarian,
   deleteLibrarian as apiDeleteLibrarian
-} from '../servers/librarianService'
+} from '../api/librarianService'
 
 const librarians = ref([])
 const form = ref({ id: null, name: '', age: '', email: '', password: '' })

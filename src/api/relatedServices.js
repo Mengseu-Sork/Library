@@ -1,3 +1,3 @@
-import axios from '../assets/axios/axios';
+import axios from '@/plugins/axios';
 
 export const fetchAllData = () => axios.get('/data');

@@ -7,7 +7,7 @@ import {
   createCategories,
   updateCategories,
   deleteCategories as apiDeleteCategory
-} from '../servers/categoryServices'
+} from '../api/categoryServices'
 
 const categories = ref([])
 const form = ref({ id: null, name: '', description: '' })

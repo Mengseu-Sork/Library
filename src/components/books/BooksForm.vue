@@ -33,7 +33,7 @@
 
 <script setup>
 import { ref, watch, onMounted } from "vue";
-import { fetchAllData } from "../../servers/relatedServices";
+import { fetchAllData } from "../../api/relatedServices";
 
 const props = defineProps({
   formData: Object,
